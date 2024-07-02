@@ -21,10 +21,10 @@ V2RAY_CONFIG='{
   }]
 }'
 
-# 设置 Shadowsocks 配置
+# 设置 Shadowsocks 配置（端口改为 443）
 SS_CONFIG='{
   "server": "0.0.0.0",
-  "server_port": 8388,
+  "server_port": 443,
   "local_address": "127.0.0.1",
   "local_port": 1080,
   "password": "'"$PASSWORD"'",
@@ -33,12 +33,16 @@ SS_CONFIG='{
   "fast_open": false
 }'
 
+# 删除现有的 V2Ray 目录和配置文件
+rm -rf ~/v2ray
+rm -f ~/v2ray.zip
+
+# 删除现有的 Shadowsocks 配置文件
+rm -f ~/config.json
+
 # 创建 V2Ray 目录和配置文件
 mkdir -p ~/v2ray
 echo "$V2RAY_CONFIG" > ~/v2ray/config.json
-
-# 创建 Shadowsocks 配置文件
-echo "$SS_CONFIG" > ~/config.json
 
 # 下载并解压 V2Ray
 wget https://github.com/v2ray/v2ray-core/releases/latest/download/v2ray-linux-64.zip -O ~/v2ray.zip
@@ -68,7 +72,7 @@ echo ""
 echo "Shadowsocks 节点信息:"
 echo "{
   \"server\": \"$SERVER_IP\",
-  \"server_port\": 8388,
+  \"server_port\": 443,
   \"password\": \"$PASSWORD\",
   \"method\": \"aes-256-cfb\"
 }"
