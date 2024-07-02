@@ -1,0 +1,14 @@
+#!name=望潮
+#!desc=望潮每日任务和抽奖
+#!category=羊毛
+
+[Script]
+# 望潮每日任务和抽奖
+望潮 = type = cron, cronexp = "20 9,15,21 * * *", script - path=https://raw.githubusercontent.com/xzxxn777/Surge/main/Script/WangChao/WangChao.js,script-update-interval=0,timeout=3600,wake-system=1,engine=jsc
+
+[Rewrite]
+# 匹配并抓取 X - ACCOUNT - ID 和 X - SESSION - ID
+    ^ https: \/\/vapp\.taizhou\.com\.cn\/.*$ url script-request-header https:/ / raw.githubusercontent.com / xzxxn777 / Surge / main / Script / WangChao / WangChao.js
+
+    [MITM]
+hostname = vapp.taizhou.com.cn
